@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
-
-namespace StudentProject.DBModel
+﻿namespace StudentProject.DBModel
 {
     public class Settings
     {

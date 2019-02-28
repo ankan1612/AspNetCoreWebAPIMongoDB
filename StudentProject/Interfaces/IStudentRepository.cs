@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MongoDB.Driver;
 using StudentProject.Models;
 
-namespace StudentProject.IRepository
+namespace StudentProject.Interfaces
 {
     public interface IStudentRepository
     {

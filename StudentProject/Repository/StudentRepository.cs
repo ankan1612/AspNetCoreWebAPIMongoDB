@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using StudentProject.DBModel;
+using StudentProject.Interfaces;
 using StudentProject.Models;
 
-namespace StudentProject.IRepository
+namespace StudentProject.Repository
 {
     public class StudentRepository : IStudentRepository
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using StudentProject.IRepository;
+using StudentProject.Interfaces;
 using StudentProject.Models;
 
 namespace StudentProject.Controllers
@@ -10,24 +10,24 @@ namespace StudentProject.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentRepository _studentRepository;
+        private readonly IStudentService _studentService;
 
-        public StudentsController(IStudentRepository studentRepository)
+        public StudentsController(IStudentService studentService)
         {
-            _studentRepository = studentRepository;
+            _studentService = studentService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetAllAsync()
         {
-            var students = await _studentRepository.GetAll();
+            var students = await _studentService.GetAllStudents();
             return Ok(students);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetAsync(string id)
         {
-            var student =  await _studentRepository.GetStudent(id);
+            var student =  await _studentService.GetStudent(id);
             if (student == null)
             {
                 return NotFound();
@@ -38,7 +38,7 @@ namespace StudentProject.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> AddAsync([FromBody] Student student)
         { 
-            var newStudent = await _studentRepository.Add(student);
+            var newStudent = await _studentService.AddStudent(student);
             if (newStudent == null)
             {
                 return NotFound();
@@ -49,7 +49,7 @@ namespace StudentProject.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Student>> UpdateAsync(string id, [FromBody] Student student)
         {
-            var updateStudent = await _studentRepository.Update(id, student);
+            var updateStudent = await _studentService.UpdateStudent(id, student);
             if (updateStudent == null)
             {
                 return NotFound();
@@ -60,7 +60,7 @@ namespace StudentProject.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(string id)
         {
-            var deleted = await _studentRepository.Remove(id);
+            var deleted = await _studentService.RemoveStudent(id);
             if (deleted)
             {
                 return Ok();
